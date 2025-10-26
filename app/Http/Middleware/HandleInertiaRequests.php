@@ -45,6 +45,28 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
             ],
+            
+            // --- BLOQUE DE TRADUCCIÓN AÑADIDO ---
+            'translations' => function () {
+                $locale = app()->getLocale(); // Obtiene el idioma actual
+
+                // Carga el archivo JSON principal del idioma (ej. lang/es.json)
+                $jsonTranslations = file_exists(lang_path("{$locale}.json"))
+                    ? json_decode(file_get_contents(lang_path("{$locale}.json")), true)
+                    : [];
+
+                // Opcional: Cargar también archivos PHP (ej. lang/es/validation.php)
+                $phpTranslations = [];
+                if (file_exists(lang_path("{$locale}/validation.php"))) {
+                    // Carga el array de validación bajo la clave 'validation'
+                    $phpTranslations['validation'] = trans('validation', [], $locale);
+                }
+                
+                // Devuelve un solo objeto fusionado
+                return array_merge($jsonTranslations, $phpTranslations);
+            },
+            // --- FIN DEL BLOQUE AÑADIDO ---
+
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
         ];
     }

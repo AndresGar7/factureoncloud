@@ -3,6 +3,7 @@ import tailwindcss from '@tailwindcss/vite';
 import vue from '@vitejs/plugin-vue';
 import laravel from 'laravel-vite-plugin';
 import { defineConfig } from 'vite';
+import path from 'path'; // <-- ¡AÑADE ESTA LÍNEA!
 
 export default defineConfig({
     plugins: [
@@ -24,4 +25,10 @@ export default defineConfig({
             },
         }),
     ],
+    // Tu sección 'resolve' está bien, solo necesitaba el import
+    resolve: {
+        alias: {
+            '@': path.resolve(__dirname, 'resources/js'),
+        },
+    },
 });
