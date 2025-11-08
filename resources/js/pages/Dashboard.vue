@@ -4,17 +4,20 @@ import { dashboard } from '@/routes';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/vue3';
 import PlaceholderPattern from '../components/PlaceholderPattern.vue';
+// Importar el composable de traducciones
+import { useTranslations } from '@/composables/useTranslations';
+const { __ } = useTranslations();
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Dashboard',
+        title: __('Dashboard'),
         href: dashboard().url,
     },
 ];
 </script>
 
 <template>
-    <Head title="Dashboard" />
+    <Head :title="__('Dashboard')" />
 
     <AppLayout :breadcrumbs="breadcrumbs">
         <div

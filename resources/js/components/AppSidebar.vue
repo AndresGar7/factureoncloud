@@ -16,10 +16,13 @@ import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
 import { BookOpen, Folder, LayoutGrid } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
+// Importar el composable de traducciones
+import { useTranslations } from '@/composables/useTranslations';
+const { __ } = useTranslations();
 
 const mainNavItems: NavItem[] = [
     {
-        title: 'Dashboard',
+        title: __('Dashboard'),
         href: dashboard(),
         icon: LayoutGrid,
     },

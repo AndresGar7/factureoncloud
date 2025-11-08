@@ -1,16 +1,17 @@
-<script setup lang="ts">
-import AppLogoIcon from '@/components/AppLogoIcon.vue';
-</script>
-
 <template>
-    <div
-        class="flex aspect-square size-8 items-center justify-center rounded-md bg-sidebar-primary text-sidebar-primary-foreground"
-    >
-        <AppLogoIcon class="size-5 fill-current text-white dark:text-black" />
-    </div>
-    <div class="ml-1 grid flex-1 text-left text-sm">
-        <span class="mb-0.5 truncate leading-tight font-semibold"
-            >Laravel Starter Kit</span
-        >
-    </div>
+  <img 
+    src="/img/facture.png" 
+    alt="Logo FactureOnCloud" 
+    class="logo-with-shadow"
+  >
 </template>
+
+<style scoped>
+.logo-with-shadow {
+  filter: drop-shadow(0 0 0 transparent);
+  transition: filter 0.3s ease;
+}
+.logo-with-shadow:hover {
+  filter: drop-shadow(0px 0px 8px #95fa22);
+}
+</style>

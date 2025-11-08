@@ -10,8 +10,8 @@ import { dashboard, login, register } from '@/routes';
 import { request } from '@/routes/password';
 import { Form, Head, Link } from '@inertiajs/vue3';
 import { LoaderCircle } from 'lucide-vue-next';
+// Importar el composable de traducciones
 import { useTranslations } from '@/composables/useTranslations';
-
 const { __ } = useTranslations();
 
 defineProps<{
@@ -38,7 +38,7 @@ defineProps<{
                     :href="dashboard()"
                     class="inline-block rounded-sm border border-[var(--border)] px-5 py-1.5 text-sm leading-normal text-[var(--foreground)] hover:text-[var(--primary)] hover:border-[var(--primary)] transition-colors"
                 >
-                    Dashboard
+                    {{ __('Dashboard') }}
                 </Link>
             </nav>
         </header>
