@@ -1,5 +1,14 @@
 {
     "Welcome": "Welcome to your application",
     "Dashboard": "Dashboard",
-    "Email address": "Email address"
+    "Email address": "Email address",
+    "Platform": "Platform",
+    "Settings": "Settings",
+    "Profile": "Profile",
+    "Profile setting": "Profile setting",
+    "Profile settings": "Administration profile",
+    "Log out": "Log out",
+    "Legend: Manage profile": "Manage your profile and account settings",
+    "Profile information": "Profile information",
+    "Description: Profile information": "Update your name and email address"
 }

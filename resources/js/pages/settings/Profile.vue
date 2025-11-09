@@ -13,6 +13,9 @@ import { Label } from '@/components/ui/label';
 import AppLayout from '@/layouts/AppLayout.vue';
 import SettingsLayout from '@/layouts/settings/Layout.vue';
 import { type BreadcrumbItem } from '@/types';
+// Importar el composable de traducciones
+import { useTranslations } from '@/composables/useTranslations';
+const { __ } = useTranslations();
 
 interface Props {
     mustVerifyEmail: boolean;
@@ -23,7 +26,7 @@ defineProps<Props>();
 
 const breadcrumbItems: BreadcrumbItem[] = [
     {
-        title: 'Profile settings',
+        title: __('Profile settings'),
         href: edit().url,
     },
 ];
@@ -34,13 +37,13 @@ const user = page.props.auth.user;
 
 <template>
     <AppLayout :breadcrumbs="breadcrumbItems">
-        <Head title="Profile settings" />
+        <Head :title="__('Profile settings')" />
 
         <SettingsLayout>
             <div class="flex flex-col space-y-6">
-                <HeadingSmall
-                    title="Profile information"
-                    description="Update your name and email address"
+                <HeadingSmall   
+                    :title="__('Profile information')"
+                    :description="__('Description: Profile information')"
                 />
 
                 <Form

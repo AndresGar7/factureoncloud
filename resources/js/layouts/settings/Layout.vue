@@ -9,10 +9,13 @@ import { edit as editProfile } from '@/routes/profile';
 import { show } from '@/routes/two-factor';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
+// Importar el composable de traducciones
+import { useTranslations } from '@/composables/useTranslations';
+const { __ } = useTranslations();
 
 const sidebarNavItems: NavItem[] = [
     {
-        title: 'Profile',
+        title: __('Profile'),
         href: editProfile(),
     },
     {
@@ -35,8 +38,8 @@ const currentPath = typeof window !== undefined ? window.location.pathname : '';
 <template>
     <div class="px-4 py-6">
         <Heading
-            title="Settings"
-            description="Manage your profile and account settings"
+            :title="__('Profile setting')"
+            :description="__('Legend: Manage profile')"
         />
 
         <div class="flex flex-col lg:flex-row lg:space-x-12">

@@ -1,5 +1,14 @@
 {
     "Welcome": "Bienvenido a tu aplicación",
     "Dashboard": "Panel de control",
-    "Email address": "Correo Eletrónico"
+    "Email address": "Correo eletrónico",
+    "Platform": "Plataforma",
+    "Settings": "Configuración",
+    "Profile": "Perfil",
+    "Profile setting": "Administrar perfil",
+    "Profile settings": "Administración de perfil",
+    "Log out": "Cerrar sesión",
+    "Legend: Manage profile": "Gestiona tu perfil y la configuración de tu cuenta.",
+    "Profile information": "Información de perfil",
+    "Description: Profile information": "Actualiza tu nombre y dirección de correo electrónico."
 }
