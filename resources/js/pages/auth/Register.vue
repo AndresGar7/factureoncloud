@@ -25,9 +25,6 @@ const { __ } = useTranslations();
         <header
             class="mb-6 w-full max-w-[335px] lg:max-w-lg flex items-center justify-end"
         >
-            <nav class="flex items-center justify-end gap-4 text-sm h-16">
-                <!-- Puedes añadir un enlace a Dashboard si el usuario ya estuviera logueado, aunque es raro en Register -->
-            </nav>
         </header>
 
         <div

@@ -30,6 +30,12 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+
+        //! TODO: VOY A MODIFICAR ESTA PARTE PARA QUE AL TERMINAR DE 
+        //! REIGSTRARSE EL USUARIO INGRESE LOS DATOS DE SU EMPRESA
+        //! PARA PODEER GUARDARLO DE LA MEJOR FORMA VALIDAR SI ES EN LA FORMA JSON
+        //! O SINO VALIDAR CUAL ES LA MEJOR FORMA MAS LIMPIA Y PROFESIONAL0
+        dd('STOP HERE');
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
@@ -42,6 +48,7 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        // TODO: ESTABAMOS INTENTANTDO COMPRENDER COMO FUNCIONABA ESTA PARTE DE LOS EVENTS
         event(new Registered($user));
 
         Auth::login($user);
