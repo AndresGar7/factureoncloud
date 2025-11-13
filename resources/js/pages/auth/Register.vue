@@ -11,6 +11,13 @@ import { LoaderCircle } from 'lucide-vue-next';
 import { useTranslations } from '@/composables/useTranslations'; // Importar traducciones
 
 const { __ } = useTranslations();
+
+// NOTA: El formulario de la imagen tiene un campo 'phone' (teléfono)
+// y NO tiene 'password'.
+// Deberás ajustar tu 'RegisteredUserController' o el objeto 'Form'
+// para que coincida con estos campos.
+// He añadido 'phone' al formulario, pero puede que necesites
+// añadirlo a tu lógica de 'RegisteredUserController.store.form()'
 </script>
 
 <template>
@@ -20,132 +27,156 @@ const { __ } = useTranslations();
     </Head>
 
     <div
-        class="flex min-h-screen flex-col items-center bg-[var(--background)] text-[var(--foreground)] p-6 lg:justify-center lg:p-8 transition-colors duration-500"
+        class="flex min-h-screen items-center justify-center bg-green-50 p-6 lg:p-8"
     >
-        <header
-            class="mb-6 w-full max-w-[335px] lg:max-w-lg flex items-center justify-end"
-        >
-        </header>
-
         <div
-            class="flex w-full items-center justify-center opacity-100 transition-opacity duration-700 lg:grow starting:opacity-0"
+            class="w-full max-w-6xl overflow-hidden rounded-2xl bg-white shadow-xl lg:grid lg:grid-cols-2"
         >
-            <main
-                class="w-full max-w-[335px] overflow-hidden rounded-2xl lg:max-w-lg shadow-[0_8px_30px_rgba(0,0,0,0.08)] bg-[var(--card)] text-[var(--card-foreground)] transition-colors duration-500"
-            >
+            <div class="relative hidden h-full lg:block">
+                                <img
+                    src="https://source.unsplash.com/random/800x900?business,laptop,office"
+                    alt="Software de facturación"
+                    class="h-full w-full object-cover"
+                />
                 <div
-                    class="relative p-8 text-[14px] leading-relaxed lg:p-16 flex flex-col justify-center overflow-hidden"
+                    class="absolute bottom-0 left-0 w-full bg-black bg-opacity-60 p-8 text-white"
                 >
-                    <div>
-                        <!-- Logo -->
-                        <img
-                            src="/img/facture.png"
-                            alt="FactureOnCloud Logo"
-                            class="h-16 w-auto mb-6 mx-auto"
-                        />
+                    <h3 class="mb-3 text-2xl font-bold">
+                        Facturas con numeración automática
+                    </h3>
+                    <ul class="list-inside list-disc space-y-1 text-lg">
+                        <li>Accede a las facturas desde cualquier lugar</li>
+                        <li>Controla los pagos de tus clientes</li>
+                    </ul>
+                </div>
+            </div>
 
-                        <!-- Título y Descripción (Opcional, ya que el logo es claro) -->
-                        <div class="text-center mb-6">
-                            <h1 class="text-lg font-semibold">{{ __('Create an account') }}</h1>
-                            <p class="text-sm text-muted-foreground">{{ __('Enter your details below to create your account') }}</p>
+            <main class="p-8 lg:p-12">
+                <h1
+                    class="mb-6 text-center text-2xl font-bold uppercase text-gray-700"
+                >
+                    Empieza gratis en menos de 1 minuto
+                </h1>
+
+                <Form
+                    v-bind="RegisteredUserController.store.form()"
+                    v-slot="{ errors, processing }"
+                    class="flex flex-col gap-4"
+                >
+                    <div class="grid gap-4">
+                        <div class="grid gap-1.5">
+                            <Label for="name">{{ __('Nombre') }}</Label>
+                            <Input
+                                id="name"
+                                type="text"
+                                required
+                                autofocus
+                                :tabindex="1"
+                                autocomplete="name"
+                                name="name"
+                                :placeholder="__('Tu nombre...')"
+                                class="border-gray-300"
+                            />
+                            <InputError :message="errors.name" />
                         </div>
 
+                        <div class="grid gap-1.5">
+                            <Label for="email">{{ __('Email') }}</Label>
+                            <Input
+                                id="email"
+                                type="email"
+                                required
+                                :tabindex="2"
+                                autocomplete="email"
+                                name="email"
+                                :placeholder="__('Tu email...')"
+                                class="border-gray-300"
+                            />
+                            <InputError :message="errors.email" />
+                        </div>
 
-                        <!-- Formulario de Registro -->
-                        <Form
-                            v-bind="RegisteredUserController.store.form()"
-                            :reset-on-success="['password', 'password_confirmation']"
-                            v-slot="{ errors, processing }"
-                            class="flex flex-col gap-6"
-                        >
-                            <div class="grid gap-6">
-                                <div class="grid gap-2">
-                                    <Label for="name">{{ __('Name') }}</Label>
-                                    <Input
-                                        id="name"
-                                        type="text"
-                                        required
-                                        autofocus
-                                        :tabindex="1"
-                                        autocomplete="name"
-                                        name="name"
-                                        :placeholder="__('Full name')"
-                                    />
-                                    <InputError :message="errors.name" />
-                                </div>
+                        <div class="grid gap-1.5">
+                            <Label for="phone">{{ __('Teléfono') }}</Label>
+                            <Input
+                                id="phone"
+                                type="tel"
+                                :tabindex="3"
+                                autocomplete="tel"
+                                name="phone"
+                                :placeholder="__('Tu teléfono...')"
+                                class="border-gray-300"
+                            />
+                            <InputError :message="errors.phone" />
+                        </div>
 
-                                <div class="grid gap-2">
-                                    <Label for="email">{{ __('Email address') }}</Label>
-                                    <Input
-                                        id="email"
-                                        type="email"
-                                        required
-                                        :tabindex="2"
-                                        autocomplete="email"
-                                        name="email"
-                                        :placeholder="__('email@example.com')"
-                                    />
-                                    <InputError :message="errors.email" />
-                                </div>
-
-                                <div class="grid gap-2">
-                                    <Label for="password">{{ __('Password') }}</Label>
-                                    <Input
-                                        id="password"
-                                        type="password"
-                                        required
-                                        :tabindex="3"
-                                        autocomplete="new-password"
-                                        name="password"
-                                        :placeholder="__('Password')"
-                                    />
-                                    <InputError :message="errors.password" />
-                                </div>
-
-                                <div class="grid gap-2">
-                                    <Label for="password_confirmation">{{ __('Confirm password') }}</Label>
-                                    <Input
-                                        id="password_confirmation"
-                                        type="password"
-                                        required
-                                        :tabindex="4"
-                                        autocomplete="new-password"
-                                        name="password_confirmation"
-                                        :placeholder="__('Confirm password')"
-                                    />
-                                    <InputError :message="errors.password_confirmation" />
-                                </div>
-
-                                <Button
-                                    type="submit"
-                                    class="mt-2 w-full"
-                                    tabindex="5"
-                                    :disabled="processing"
-                                    data-test="register-user-button"
-                                >
-                                    <LoaderCircle
-                                        v-if="processing"
-                                        class="h-4 w-4 animate-spin"
-                                    />
-                                    {{ __('Create account') }}
-                                </Button>
-                            </div>
-
-                            <div class="text-center text-sm text-muted-foreground">
-                                {{ __("Already have an account?") }}
+                        <div class="flex items-start gap-3 pt-2">
+                            <input
+                                id="terms"
+                                type="checkbox"
+                                checked
+                                class="mt-1 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                            />
+                            <label for="terms" class="text-sm text-gray-600">
+                                He leído y acepto el
                                 <TextLink
-                                    :href="login()"
-                                    class="underline underline-offset-4"
-                                    :tabindex="6"
-                                    >{{ __('Log in') }}</TextLink
+                                    href="#"
+                                    class="font-medium text-blue-600 underline"
+                                    >Aviso Legal</TextLink
+                                >, la
+                                <TextLink
+                                    href="#"
+                                    class="font-medium text-blue-600 underline"
+                                    >Política de privacidad</TextLink
                                 >
-                            </div>
-                        </Form>
+                                y los
+                                <TextLink
+                                    href="#"
+                                    class="font-medium text-blue-600 underline"
+                                    >Términos y Condiciones</TextLink
+                                >.
+                            </label>
+                        </div>
+
+                        <div class="flex items-start gap-3">
+                            <input
+                                id="newsletter"
+                                type="checkbox"
+                                checked
+                                class="mt-1 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                            />
+                            <label for="newsletter" class="text-sm text-gray-600">
+                                Deseo recibir el boletín electrónico así como
+                                información o publicidad sobre productos y
+                                promociones.
+                            </label>
+                        </div>
+
+                        <Button
+                            type="submit"
+                            class="mt-4 w-full bg-yellow-500 py-3 text-base font-bold uppercase text-black shadow-md hover:bg-yellow-600"
+                            tabindex="4"
+                            :disabled="processing"
+                            data-test="register-user-button"
+                        >
+                            <LoaderCircle
+                                v-if="processing"
+                                class="mr-2 h-5 w-5 animate-spin"
+                            />
+                            {{ __('REGISTRARSE') }}
+                        </Button>
                     </div>
+                </Form>
+
+                <div class="mt-6 text-center text-sm text-muted-foreground">
+                    {{ __('Already have an account?') }}
+                    <TextLink
+                        :href="login()"
+                        class="underline underline-offset-4"
+                        :tabindex="5"
+                        >{{ __('Log in') }}</TextLink
+                    >
                 </div>
             </main>
         </div>
-
-        <div class="hidden h-14.5 lg:block"></div>
     </div>
 </template>
